@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django_hosts',
     'shortener'
 ]
 
 MIDDLEWARE = [
+    # 'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,9 +50,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django_hosts.middleware.HostsResponseMiddleware'
 ]
 
 ROOT_URLCONF = 'bha.urls'
+# ROOT_HOSTCONF = 'bha.hosts'
+# DEFAULT_HOST = 'www'
+# DEFAULT_REDIRECT_URL = "http://127.0.0.1:8000/"
 
 TEMPLATES = [
     {
@@ -120,3 +126,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+SHORTCODE_MAX = 15
+SHORTCODE_MIN = 6

@@ -1,5 +1,10 @@
 from django.db import models
 from .utils import code_generator, create_shortcode
+from django.conf import settings
+from .validators import validate_url
+
+SHORTCODE_MAX = getattr(settings, "SHORTCODE_MAX", 15)
+
 # Create your models here.
 class BharrURLManager(models.Manager):
     def all(self, *args, **kwargs):
@@ -23,8 +28,8 @@ class BharrURLManager(models.Manager):
 
 
 class BharrURL(models.Model):
-    url = models.CharField(max_length=225,)
-    shortcode = models.CharField(max_length=15, unique=True, blank=True)
+    url = models.CharField(max_length=225, validators=[validate_url])
+    shortcode = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
